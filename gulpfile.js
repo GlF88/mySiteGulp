@@ -25,7 +25,7 @@ var gulp = require('gulp'), // Task runner
     jshint = require('gulp-jshint'), // JS code linter
     stylish = require('jshint-stylish'), // Reporter for JSHint
     imagemin = require('gulp-imagemin'), // Optimize images
-    pngquant = require('imagemin-pngquant'), // PNG plugin for ImageMin
+    //pngquant = require('imagemin-pngquant'), // PNG plugin for ImageMin
     spritesmith = require('gulp.spritesmith'), // Convert a set of images into a spritesheet and CSS variables
     svg2png = require('gulp-svg2png'), // Convert SVGs to PNGs
     svgmin = require('gulp-svgmin'), // Minify SVG with SVGO
@@ -83,7 +83,7 @@ var config = {
     server: {
         baseDir: "./build"
     },
-    tunnel: true,
+    // tunnel: true,
     host: 'localhost',
     port: 9000,
     injectChanges: true,
@@ -154,20 +154,20 @@ gulp.task('less', function() {
 });
 
 /* Images */
-gulp.task('images', function () {
-    return gulp.src(projectPath.src.img)
-        .pipe(imagemin({
-            progressive: true,
-            optimizationLevel: 5,
-            use: [pngquant()],
-            interlaced: true
-        }))
-        .pipe(size({
-            title: 'Images'
-        }))
-        .pipe(gulp.dest(projectPath.build.img))
-        .pipe(reload({stream: true}));
-});
+// gulp.task('images', function () {
+//     return gulp.src(projectPath.src.img)
+//         .pipe(imagemin({
+//             progressive: true,
+//             optimizationLevel: 5,
+//             use: [pngquant()],
+//             interlaced: true
+//         }))
+//         .pipe(size({
+//             title: 'Images'
+//         }))
+//         .pipe(gulp.dest(projectPath.build.img))
+//         .pipe(reload({stream: true}));
+// });
 
 /* SVG */
 gulp.task('svg', function () {
@@ -274,9 +274,9 @@ gulp.task('watch',['webserver'], function(){
     watch([projectPath.watch.style], function(event, cb) {
         gulp.start('less');
     });
-    watch([projectPath.watch.img], function(event, cb) {
-        gulp.start('images');
-    });
+    // watch([projectPath.watch.img], function(event, cb) {
+    //     gulp.start('images');
+    // });
     watch([projectPath.watch.svg], function(event, cb) {
         gulp.start('svg');
     });
